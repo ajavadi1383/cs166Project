@@ -16,15 +16,13 @@ cd Project
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 
-cp .env.example .env          # adjust DB_USER / DB_PASSWORD / DB_NAME if needed
-
-./startPostgreSQL.sh          # start the local PostgreSQL server
-./createPostgreDB.sh          # create auction_db + load schema, indexes & sample data
+source startPostgreSQL.sh          # start the local PostgreSQL server
+source createPostgreDB.sh          # create auction_db + load schema, indexes & sample data
 
 python run.py                 # serves http://localhost:5050
 ```
 
-Stop the database with `./stopPostgreSQL.sh` when finished.
+Stop the database with ` source stopPostgreSQL.sh` when finished.
 
 > The scripts assume PostgreSQL 16 from Homebrew (`/opt/homebrew/opt/postgresql@16`).
 > Edit the paths at the top of the scripts if your install differs, or run the
@@ -49,22 +47,6 @@ Password is `password123` for every account.
   at any time (highest bidder wins), and update shipment status/tracking.
 - **Admin**: change user roles, delete users, and adjust any payment or shipment
   status.
-
-## Project layout
-
-```
-run.py                     # Flask entry point
-sql/                       # schema.sql, indexes.sql, seed_data.sql
-app/
-  __init__.py              # app factory + blueprint registration
-  config.py  db.py  auth.py
-  routes/                  # one blueprint per entity (auth, users, items,
-                           #   auctions, bids, payments, shipments)
-templates/index.html       # SPA shell
-static/css/style.css
-static/js/                 # api, state, dom, toast, modal, navigation, auth, main
-static/js/views/           # one module per screen (browse, auctionDetail, …)
-```
 
 ## Design notes
 
