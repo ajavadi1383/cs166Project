@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BidHub — Online Auction & Bidding</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+  <!-- ===================== AUTH SCREEN ===================== -->
+  <div id="auth-screen" class="auth-screen">
+    <div class="auth-card">
+      <div class="brand-block">
+        <div class="brand-logo">B</div>
+        <h1>BidHub</h1>
+        <p class="tagline">Online Auction &amp; Bidding System</p>
+      </div>
+
+      <div class="tabs">
+        <button class="tab active" data-tab="login">Sign In</button>
+        <button class="tab" data-tab="register">Create Account</button>
+      </div>
+
+      <form id="login-form" class="auth-form">
+        <label>Login <input name="login" required autocomplete="username" /></label>
+        <label>Password <input name="password" type="password" required autocomplete="current-password" /></label>
+        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+        <p class="hint">Demo accounts (password <code>password123</code>): <code>admin</code>, <code>alice</code> (seller), <code>dave</code> (buyer)</p>
+      </form>
+
+      <form id="register-form" class="auth-form hidden">
+        <label>Login <input name="login" required maxlength="50" /></label>
+        <label>Password <input name="password" type="password" required /></label>
+        <label>Phone Number <input name="phone_num" required /></label>
+        <label>Address <input name="address" required /></label>
+        <label>Favorite Category <span class="opt">(optional)</span><input name="favorite_category" /></label>
+        <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+        <p class="hint">New accounts start with the <strong>Buyer</strong> role.</p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================== APP SHELL ===================== -->
+  <div id="app" class="app hidden">
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="brand-logo small">B</span>
+        <strong>BidHub</strong>
+      </div>
+      <nav id="main-nav" class="main-nav"></nav>
+      <div class="topbar-right">
+        <span id="user-chip" class="user-chip"></span>
+        <button id="logout-btn" class="btn btn-ghost">Logout</button>
+      </div>
+    </header>
+
+    <main id="view" class="view"></main>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+  <div id="modal-root"></div>
+
+  <script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
